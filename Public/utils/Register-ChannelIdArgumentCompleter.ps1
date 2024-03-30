@@ -22,7 +22,7 @@ function Register-ChannelIdArgumentCompleter {
 
     foreach ($FuncName in $script:AutocompleteFunctions.Keys) {
         $params.CommandName = $FuncName
-        $params.ParameterName = $AutocompleteFunctions[$FuncName]
+        $params.ParameterName = $script:AutocompleteFunctions[$FuncName]
 
         Register-ArgumentCompleter @params
     }
