@@ -2,7 +2,7 @@ TOPIC
     about_PS_Mirth
 
 SHORT DESCRIPTION
-    PowerShell wrapper fro the Mirth RESTful API.
+    PowerShell wrapper for the Mirth RESTful API.
 
 LONG DESCRIPTION
     This module provides PowerShell functions to connect to and perform various functions exposed
