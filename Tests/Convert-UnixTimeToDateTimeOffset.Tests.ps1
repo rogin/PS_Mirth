@@ -28,7 +28,6 @@ Describe 'Convert-UnixTimeToDateTimeOffset' {
     It 'Given no timezone, it returns correct data' {
         #1/17/2023 7:56:42 PM +00:00
         $UnixTimeInMillis = 1673985402974
-        $TimeZone = "America/Chicago"
         $ConvertedTime = Convert-UnixTimeToDateTimeOffset $UnixTimeInMillis
         $ConvertedTime | Should -BeOfType [System.DateTimeOffset]
         $ConvertedTime.ToString() | Should -Be "1/17/2023 7:56:42 PM +00:00"
