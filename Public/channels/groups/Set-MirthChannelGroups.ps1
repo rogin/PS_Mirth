@@ -70,13 +70,11 @@ function Set-MirthChannelGroups {
             if ([string]::IsNullOrEmpty($payloadFilePath) -or [string]::IsNullOrWhiteSpace($payloadFilePath)) {
                 Write-Error "A channel XML payLoad string is required!"
                 return $null
-            }
-            else {
+            } else {
                 Write-Debug "Loading channel XML from path $payLoadFilePath"
                 [xml]$payloadXML = Get-Content $payLoadFilePath  
             }
-        }
-        else {
+        } else {
             $payloadXML = [xml]$payLoad
         }
 
@@ -88,6 +86,8 @@ function Set-MirthChannelGroups {
 
         Write-Debug "channel ids to be removed from group:"
         Write-Debug $removeChannelGroupXml.outerXml
+
+        $boundary = "--boundary--"
         
         $uri = $serverUrl + '/api/channelgroups/_bulkUpdate'
         $parameters = [System.Web.HttpUtility]::ParseQueryString([String]::Empty)
@@ -99,7 +99,6 @@ function Set-MirthChannelGroups {
 
         Write-Debug "POST to Mirth $uri "
 
-        $boundary = "--boundary--"
         $LF = "`n"
         $bodyLines = (
             "--$boundary",
@@ -117,8 +116,7 @@ function Set-MirthChannelGroups {
             # Returns the response received from the server (we pass it on).
             #
             Invoke-RestMethod -WebSession $session -Uri $uri -Method Post -Headers $headers -TimeoutSec 20 -Body $bodyLines
-        }
-        catch [System.Net.WebException] {
+        } catch [System.Net.WebException] {
             throw $_
         }
     } 
